@@ -1,0 +1,30 @@
+name: so101_image
+
+obs_mode: rgb
+image_shape: [3, 240, 320]
+in_channels: 3
+dataset_path: /home/itri2026-3090/diffusion_policy/data/so101/so101_rgbd.zarr
+
+shape_meta: &shape_meta
+  obs:
+    image:
+      shape: ${task.image_shape}
+      type: rgb
+    agent_pos:
+      shape: [8]
+      type: low_dim
+  action:
+    shape: [8]
+
+env_runner: null
+
+dataset:
+  _target_: diffusion_policy.dataset.so101_image_dataset.SO101ImageDataset
+  zarr_path: ${task.dataset_path}
+  horizon: ${horizon}
+  pad_before: ${eval:'${n_obs_steps}-1'}
+  pad_after: ${eval:'${n_action_steps}-1'}
+  seed: 42
+  val_ratio: 0.10
+  max_train_episodes: null
+  obs_mode: ${task.obs_mode}

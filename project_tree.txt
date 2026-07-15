@@ -1,0 +1,192 @@
+.
+├── conda_environment_macos.yaml
+├── conda_environment_nomujoco.yaml
+├── conda_environment_real.yaml
+├── conda_environment.yaml
+├── dataset
+│   └── so101_image_dataset.py
+├── demo_pusht.py
+├── demo_real_robot.py
+├── diffusion_policy
+│   ├── codecs
+│   │   └── imagecodecs_numcodecs.py
+│   ├── common
+│   │   ├── checkpoint_util.py
+│   │   ├── cv2_util.py
+│   │   ├── env_util.py
+│   │   ├── json_logger.py
+│   │   ├── nested_dict_util.py
+│   │   ├── normalize_util.py
+│   │   ├── pose_trajectory_interpolator.py
+│   │   ├── precise_sleep.py
+│   │   ├── pymunk_override.py
+│   │   ├── pymunk_util.py
+│   │   ├── pytorch_util.py
+│   │   ├── replay_buffer.py
+│   │   ├── robomimic_config_util.py
+│   │   ├── robomimic_util.py
+│   │   ├── sampler.py
+│   │   └── timestamp_accumulator.py
+│   ├── config
+│   │   ├── task
+│   │   ├── train_bet_lowdim_workspace.yaml
+│   │   ├── train_diffusion_transformer_hybrid_workspace.yaml
+│   │   ├── train_diffusion_transformer_lowdim_kitchen_workspace.yaml
+│   │   ├── train_diffusion_transformer_lowdim_pusht_workspace.yaml
+│   │   ├── train_diffusion_transformer_lowdim_workspace.yaml
+│   │   ├── train_diffusion_transformer_real_hybrid_workspace.yaml
+│   │   ├── train_diffusion_unet_ddim_hybrid_workspace.yaml
+│   │   ├── train_diffusion_unet_ddim_lowdim_workspace.yaml
+│   │   ├── train_diffusion_unet_hybrid_workspace.yaml
+│   │   ├── train_diffusion_unet_image_pretrained_workspace.yaml
+│   │   ├── train_diffusion_unet_image_workspace.yaml
+│   │   ├── train_diffusion_unet_lowdim_workspace.yaml
+│   │   ├── train_diffusion_unet_real_hybrid_workspace.yaml
+│   │   ├── train_diffusion_unet_real_image_workspace.yaml
+│   │   ├── train_diffusion_unet_real_pretrained_workspace.yaml
+│   │   ├── train_diffusion_unet_video_workspace.yaml
+│   │   ├── train_ibc_dfo_hybrid_workspace.yaml
+│   │   ├── train_ibc_dfo_lowdim_workspace.yaml
+│   │   ├── train_ibc_dfo_real_hybrid_workspace.yaml
+│   │   ├── train_robomimic_image_workspace.yaml
+│   │   ├── train_robomimic_lowdim_workspace.yaml
+│   │   └── train_robomimic_real_image_workspace.yaml
+│   ├── convert_so101_rgbd_to_zarr.py
+│   ├── convert_so101_to_zarr.py
+│   ├── dataset
+│   │   ├── base_dataset.py
+│   │   ├── blockpush_lowdim_dataset.py
+│   │   ├── kitchen_lowdim_dataset.py
+│   │   ├── kitchen_mjl_lowdim_dataset.py
+│   │   ├── mujoco_image_dataset.py
+│   │   ├── pusht_dataset.py
+│   │   ├── pusht_image_dataset.py
+│   │   ├── real_pusht_image_dataset.py
+│   │   ├── robomimic_replay_image_dataset.py
+│   │   ├── robomimic_replay_lowdim_dataset.py
+│   │   └── so101_image_dataset.py
+│   ├── env
+│   │   ├── block_pushing
+│   │   ├── kitchen
+│   │   ├── pusht
+│   │   └── robomimic
+│   ├── env_runner
+│   │   ├── base_image_runner.py
+│   │   ├── base_lowdim_runner.py
+│   │   ├── blockpush_lowdim_runner.py
+│   │   ├── kitchen_lowdim_runner.py
+│   │   ├── pusht_image_runner.py
+│   │   ├── pusht_keypoints_runner.py
+│   │   ├── real_pusht_image_runner.py
+│   │   ├── robomimic_image_runner.py
+│   │   └── robomimic_lowdim_runner.py
+│   ├── gym_util
+│   │   ├── async_vector_env.py
+│   │   ├── multistep_wrapper.py
+│   │   ├── sync_vector_env.py
+│   │   ├── video_recording_wrapper.py
+│   │   └── video_wrapper.py
+│   ├── loss_curve.png
+│   ├── model
+│   │   ├── bet
+│   │   ├── common
+│   │   ├── diffusion
+│   │   └── vision
+│   ├── mse_curve.png
+│   ├── plot_loss.py
+│   ├── plot_mse.py
+│   ├── policy
+│   │   ├── base_image_policy.py
+│   │   ├── base_lowdim_policy.py
+│   │   ├── bet_lowdim_policy.py
+│   │   ├── diffusion_transformer_hybrid_image_policy.py
+│   │   ├── diffusion_transformer_lowdim_policy.py
+│   │   ├── diffusion_unet_hybrid_image_policy.py
+│   │   ├── diffusion_unet_image_policy.py
+│   │   ├── diffusion_unet_lowdim_policy.py
+│   │   ├── diffusion_unet_video_policy.py
+│   │   ├── ibc_dfo_hybrid_image_policy.py
+│   │   ├── ibc_dfo_lowdim_policy.py
+│   │   ├── robomimic_image_policy.py
+│   │   └── robomimic_lowdim_policy.py
+│   ├── real_world
+│   │   ├── keystroke_counter.py
+│   │   ├── multi_camera_visualizer.py
+│   │   ├── multi_realsense.py
+│   │   ├── real_data_conversion.py
+│   │   ├── real_env.py
+│   │   ├── real_inference_util.py
+│   │   ├── realsense_config
+│   │   ├── rtde_interpolation_controller.py
+│   │   ├── single_realsense.py
+│   │   ├── spacemouse.py
+│   │   ├── spacemouse_shared_memory.py
+│   │   └── video_recorder.py
+│   ├── scripts
+│   │   ├── bet_blockpush_conversion.py
+│   │   ├── blockpush_abs_conversion.py
+│   │   ├── episode_lengths.py
+│   │   ├── generate_bet_blockpush.py
+│   │   ├── real_dataset_conversion.py
+│   │   ├── real_pusht_metrics.py
+│   │   ├── real_pusht_successrate.py
+│   │   ├── robomimic_dataset_action_comparison.py
+│   │   └── robomimic_dataset_conversion.py
+│   ├── shared_memory
+│   │   ├── shared_memory_queue.py
+│   │   ├── shared_memory_ring_buffer.py
+│   │   ├── shared_memory_util.py
+│   │   └── shared_ndarray.py
+│   ├── training_curves.png
+│   └── workspace
+│       ├── base_workspace.py
+│       ├── train_bet_lowdim_workspace.py
+│       ├── train_diffusion_transformer_hybrid_workspace.py
+│       ├── train_diffusion_transformer_lowdim_workspace.py
+│       ├── train_diffusion_unet_hybrid_workspace.py
+│       ├── train_diffusion_unet_image_workspace.py
+│       ├── train_diffusion_unet_lowdim_workspace.py
+│       ├── train_diffusion_unet_video_workspace.py
+│       ├── train_ibc_dfo_hybrid_workspace.py
+│       ├── train_ibc_dfo_lowdim_workspace.py
+│       ├── train_robomimic_image_workspace.py
+│       └── train_robomimic_lowdim_workspace.py
+├── dp_inference_server.py
+├── eval.py
+├── eval_real_robot.py
+├── image_pusht_diffusion_policy_cnn.yaml
+├── LICENSE
+├── loss_curve_batch32_crop76.png
+├── loss_curve_batch64_crop76.png
+├── loss_curve_future6.png
+├── media
+│   ├── multimodal_sim.png
+│   └── teaser.png
+├── mse_curve_batch32_crop76.png
+├── mse_curve_batch64_crop76.png
+├── mse_curve_future6.png
+├── multirun_metrics.py
+├── project_tree.txt
+├── pyrightconfig.json
+├── ray_exec.py
+├── ray_train_multirun.py
+├── README.md
+├── setup.py
+├── test_load_policy.py
+├── test_predict_dummy.py
+├── tests
+│   ├── test_block_pushing.py
+│   ├── test_cv2_util.py
+│   ├── test_multi_realsense.py
+│   ├── test_pose_trajectory_interpolator.py
+│   ├── test_precise_sleep.py
+│   ├── test_replay_buffer.py
+│   ├── test_ring_buffer.py
+│   ├── test_robomimic_image_runner.py
+│   ├── test_robomimic_lowdim_runner.py
+│   ├── test_shared_queue.py
+│   ├── test_single_realsense.py
+│   └── test_timestamp_accumulator.py
+└── train.py
+
+27 directories, 162 files

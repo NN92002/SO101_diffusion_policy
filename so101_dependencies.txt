@@ -1,0 +1,344 @@
+diffusion_policy/config/train_robomimic_real_image_workspace.yaml:6:_target_: diffusion_policy.workspace.train_robomimic_image_workspace.TrainRobomimicImageWorkspace
+diffusion_policy/config/train_robomimic_real_image_workspace.yaml:21:  _target_: diffusion_policy.policy.robomimic_image_policy.RobomimicImagePolicy
+diffusion_policy/config/train_diffusion_unet_lowdim_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_lowdim_workspace.TrainDiffusionUnetLowdimWorkspace
+diffusion_policy/config/train_diffusion_unet_lowdim_workspace.yaml:25:  _target_: diffusion_policy.policy.diffusion_unet_lowdim_policy.DiffusionUnetLowdimPolicy
+diffusion_policy/config/train_diffusion_unet_lowdim_workspace.yaml:28:    _target_: diffusion_policy.model.diffusion.conditional_unet1d.ConditionalUnet1D
+diffusion_policy/config/train_diffusion_unet_lowdim_workspace.yaml:39:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_unet_lowdim_workspace.yaml:63:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_lowdim_workspace.yaml:85:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_unet_real_pretrained_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_image_workspace.TrainDiffusionUnetImageWorkspace
+diffusion_policy/config/train_diffusion_unet_real_pretrained_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_unet_image_policy.DiffusionUnetImagePolicy
+diffusion_policy/config/train_diffusion_unet_real_pretrained_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddim.DDIMScheduler
+diffusion_policy/config/train_diffusion_unet_real_pretrained_workspace.yaml:40:    _target_: diffusion_policy.model.vision.multi_image_obs_encoder.MultiImageObsEncoder
+diffusion_policy/config/train_diffusion_unet_real_pretrained_workspace.yaml:43:      _target_: diffusion_policy.model.vision.model_getter.get_resnet
+diffusion_policy/config/train_diffusion_unet_real_pretrained_workspace.yaml:69:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_real_pretrained_workspace.yaml:91:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_ibc_dfo_hybrid_workspace.yaml:6:_target_: diffusion_policy.workspace.train_ibc_dfo_hybrid_workspace.TrainIbcDfoHybridWorkspace
+diffusion_policy/config/train_ibc_dfo_hybrid_workspace.yaml:21:  _target_: diffusion_policy.policy.ibc_dfo_hybrid_image_policy.IbcDfoHybridImagePolicy
+diffusion_policy/config/train_ibc_dfo_hybrid_workspace.yaml:53:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_unet_image_pretrained_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_image_workspace.TrainDiffusionUnetImageWorkspace
+diffusion_policy/config/train_diffusion_unet_image_pretrained_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_unet_image_policy.DiffusionUnetImagePolicy
+diffusion_policy/config/train_diffusion_unet_image_pretrained_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_unet_image_pretrained_workspace.yaml:37:    _target_: diffusion_policy.model.vision.multi_image_obs_encoder.MultiImageObsEncoder
+diffusion_policy/config/train_diffusion_unet_image_pretrained_workspace.yaml:40:      _target_: diffusion_policy.model.vision.model_getter.get_resnet
+diffusion_policy/config/train_diffusion_unet_image_pretrained_workspace.yaml:66:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_image_pretrained_workspace.yaml:88:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_unet_image_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_image_workspace.TrainDiffusionUnetImageWorkspace
+diffusion_policy/config/train_diffusion_unet_image_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_unet_image_policy.DiffusionUnetImagePolicy
+diffusion_policy/config/train_diffusion_unet_image_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_unet_image_workspace.yaml:37:    _target_: diffusion_policy.model.vision.multi_image_obs_encoder.MultiImageObsEncoder
+diffusion_policy/config/train_diffusion_unet_image_workspace.yaml:40:      _target_: diffusion_policy.model.vision.model_getter.get_resnet
+diffusion_policy/config/train_diffusion_unet_image_workspace.yaml:67:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_image_workspace.yaml:89:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_ibc_dfo_lowdim_workspace.yaml:6:_target_: diffusion_policy.workspace.train_ibc_dfo_lowdim_workspace.TrainIbcDfoLowdimWorkspace
+diffusion_policy/config/train_ibc_dfo_lowdim_workspace.yaml:22:  _target_: diffusion_policy.policy.ibc_dfo_lowdim_policy.IbcDfoLowdimPolicy
+diffusion_policy/config/train_ibc_dfo_lowdim_workspace.yaml:51:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_transformer_lowdim_pusht_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_transformer_lowdim_workspace.TrainDiffusionTransformerLowdimWorkspace
+diffusion_policy/config/train_diffusion_transformer_lowdim_pusht_workspace.yaml:23:  _target_: diffusion_policy.policy.diffusion_transformer_lowdim_policy.DiffusionTransformerLowdimPolicy
+diffusion_policy/config/train_diffusion_transformer_lowdim_pusht_workspace.yaml:26:    _target_: diffusion_policy.model.diffusion.transformer_for_diffusion.TransformerForDiffusion
+diffusion_policy/config/train_diffusion_transformer_lowdim_pusht_workspace.yaml:45:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_transformer_lowdim_pusht_workspace.yaml:67:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_real_image_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_image_workspace.TrainDiffusionUnetImageWorkspace
+diffusion_policy/config/train_diffusion_unet_real_image_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_unet_image_policy.DiffusionUnetImagePolicy
+diffusion_policy/config/train_diffusion_unet_real_image_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddim.DDIMScheduler
+diffusion_policy/config/train_diffusion_unet_real_image_workspace.yaml:40:    _target_: diffusion_policy.model.vision.multi_image_obs_encoder.MultiImageObsEncoder
+diffusion_policy/config/train_diffusion_unet_real_image_workspace.yaml:43:      _target_: diffusion_policy.model.vision.model_getter.get_resnet
+diffusion_policy/config/train_diffusion_unet_real_image_workspace.yaml:69:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_real_image_workspace.yaml:91:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_transformer_real_hybrid_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_transformer_hybrid_workspace.TrainDiffusionTransformerHybridWorkspace
+diffusion_policy/config/train_diffusion_transformer_real_hybrid_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_transformer_hybrid_image_policy.DiffusionTransformerHybridImagePolicy
+diffusion_policy/config/train_diffusion_transformer_real_hybrid_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddim.DDIMScheduler
+diffusion_policy/config/train_diffusion_transformer_real_hybrid_workspace.yaml:62:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_video_workspace.TrainDiffusionUnetVideoWorkspace
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:20:  _target_: diffusion_policy.policy.diffusion_unet_video_policy.DiffusionUnetVideoPolicy
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:25:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:35:    _target_: diffusion_policy.model.obs_encoder.video_core.VideoCore
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:38:      _target_: diffusion_policy.model.obs_encoder.video_core.VideoResNet
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:45:      _target_: diffusion_policy.model.ibc.global_avgpool.GlobalAvgpool
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:70:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:84:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_unet_ddim_hybrid_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_hybrid_workspace.TrainDiffusionUnetHybridWorkspace
+diffusion_policy/config/train_diffusion_unet_ddim_hybrid_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_unet_hybrid_image_policy.DiffusionUnetHybridImagePolicy
+diffusion_policy/config/train_diffusion_unet_ddim_hybrid_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddim.DDIMScheduler
+diffusion_policy/config/train_diffusion_unet_ddim_hybrid_workspace.yaml:58:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_ddim_hybrid_workspace.yaml:80:  _target_: torch.optim.AdamW
+diffusion_policy/config/task/kitchen_lowdim_abs.yaml:11:  _target_: diffusion_policy.env_runner.kitchen_lowdim_runner.KitchenLowdimRunner
+diffusion_policy/config/task/kitchen_lowdim_abs.yaml:30:  _target_: diffusion_policy.dataset.kitchen_mjl_lowdim_dataset.KitchenMjlLowdimDataset
+diffusion_policy/config/task/can_lowdim.yaml:14:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/can_lowdim.yaml:36:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/tool_hang_image.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/tool_hang_image.yaml:51:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/lift_lowdim.yaml:14:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/lift_lowdim.yaml:37:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/blockpush_lowdim_seed.yaml:9:  _target_: diffusion_policy.env_runner.blockpush_lowdim_runner.BlockPushLowdimRunner
+diffusion_policy/config/task/blockpush_lowdim_seed.yaml:26:  _target_: diffusion_policy.dataset.blockpush_lowdim_dataset.BlockPushLowdimDataset
+diffusion_policy/config/task/can_image_abs.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/can_image_abs.yaml:52:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/pusht_lowdim.yaml:8:  _target_: diffusion_policy.env_runner.pusht_keypoints_runner.PushTKeypointsRunner
+diffusion_policy/config/task/pusht_lowdim.yaml:27:  _target_: diffusion_policy.dataset.pusht_dataset.PushTLowdimDataset
+diffusion_policy/config/task/square_lowdim_abs.yaml:15:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/square_lowdim_abs.yaml:37:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/square_image_abs.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/square_image_abs.yaml:52:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/lift_image.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/lift_image.yaml:52:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/square_lowdim.yaml:14:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/square_lowdim.yaml:36:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/tool_hang_image_abs.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/tool_hang_image_abs.yaml:51:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/kitchen_lowdim.yaml:10:  _target_: diffusion_policy.env_runner.kitchen_lowdim_runner.KitchenLowdimRunner
+diffusion_policy/config/task/kitchen_lowdim.yaml:27:  _target_: diffusion_policy.dataset.kitchen_lowdim_dataset.KitchenLowdimDataset
+diffusion_policy/config/task/real_pusht_image.yaml:31:  _target_: diffusion_policy.env_runner.real_pusht_image_runner.RealPushTImageRunner
+diffusion_policy/config/task/real_pusht_image.yaml:34:  _target_: diffusion_policy.dataset.real_pusht_image_dataset.RealPushTImageDataset
+diffusion_policy/config/task/so101_image.yaml:1:name: so101_image
+diffusion_policy/config/task/so101_image.yaml:6:dataset_path: /home/itri2026-3090/diffusion_policy/data/so101/so101_rgbd.zarr
+diffusion_policy/config/task/so101_image.yaml:22:  _target_: diffusion_policy.dataset.so101_image_dataset.SO101ImageDataset
+diffusion_policy/config/task/tool_hang_lowdim.yaml:14:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/tool_hang_lowdim.yaml:36:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/transport_image.yaml:41:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/transport_image.yaml:63:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/transport_lowdim_abs.yaml:18:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/transport_lowdim_abs.yaml:40:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/can_lowdim_abs.yaml:14:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/can_lowdim_abs.yaml:36:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/transport_lowdim.yaml:18:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/transport_lowdim.yaml:40:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/blockpush_lowdim_seed_abs.yaml:9:  _target_: diffusion_policy.env_runner.blockpush_lowdim_runner.BlockPushLowdimRunner
+diffusion_policy/config/task/blockpush_lowdim_seed_abs.yaml:26:  _target_: diffusion_policy.dataset.blockpush_lowdim_dataset.BlockPushLowdimDataset
+diffusion_policy/config/task/pusht_image.yaml:17:  _target_: diffusion_policy.env_runner.pusht_image_runner.PushTImageRunner
+diffusion_policy/config/task/pusht_image.yaml:33:  _target_: diffusion_policy.dataset.pusht_image_dataset.PushTImageDataset
+diffusion_policy/config/task/lift_lowdim_abs.yaml:14:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/lift_lowdim_abs.yaml:37:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/can_image.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/can_image.yaml:52:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/tool_hang_lowdim_abs.yaml:14:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/tool_hang_lowdim_abs.yaml:36:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/transport_image_abs.yaml:41:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/transport_image_abs.yaml:63:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/lift_image_abs.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/lift_image_abs.yaml:51:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/square_image.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/square_image.yaml:52:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/train_robomimic_lowdim_workspace.yaml:6:_target_: diffusion_policy.workspace.train_robomimic_lowdim_workspace.TrainRobomimicLowdimWorkspace
+diffusion_policy/config/train_robomimic_lowdim_workspace.yaml:22:  _target_: diffusion_policy.policy.robomimic_lowdim_policy.RobomimicLowdimPolicy
+diffusion_policy/config/train_diffusion_unet_ddim_lowdim_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_lowdim_workspace.TrainDiffusionUnetLowdimWorkspace
+diffusion_policy/config/train_diffusion_unet_ddim_lowdim_workspace.yaml:25:  _target_: diffusion_policy.policy.diffusion_unet_lowdim_policy.DiffusionUnetLowdimPolicy
+diffusion_policy/config/train_diffusion_unet_ddim_lowdim_workspace.yaml:28:    _target_: diffusion_policy.model.diffusion.conditional_unet1d.ConditionalUnet1D
+diffusion_policy/config/train_diffusion_unet_ddim_lowdim_workspace.yaml:39:    _target_: diffusers.schedulers.scheduling_ddim.DDIMScheduler
+diffusion_policy/config/train_diffusion_unet_ddim_lowdim_workspace.yaml:66:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_ddim_lowdim_workspace.yaml:88:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_robomimic_image_workspace.yaml:6:_target_: diffusion_policy.workspace.train_robomimic_image_workspace.TrainRobomimicImageWorkspace
+diffusion_policy/config/train_robomimic_image_workspace.yaml:21:  _target_: diffusion_policy.policy.robomimic_image_policy.RobomimicImagePolicy
+diffusion_policy/config/train_diffusion_unet_real_hybrid_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_hybrid_workspace.TrainDiffusionUnetHybridWorkspace
+diffusion_policy/config/train_diffusion_unet_real_hybrid_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_unet_hybrid_image_policy.DiffusionUnetHybridImagePolicy
+diffusion_policy/config/train_diffusion_unet_real_hybrid_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddim.DDIMScheduler
+diffusion_policy/config/train_diffusion_unet_real_hybrid_workspace.yaml:59:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_real_hybrid_workspace.yaml:81:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_transformer_lowdim_kitchen_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_transformer_lowdim_workspace.TrainDiffusionTransformerLowdimWorkspace
+diffusion_policy/config/train_diffusion_transformer_lowdim_kitchen_workspace.yaml:23:  _target_: diffusion_policy.policy.diffusion_transformer_lowdim_policy.DiffusionTransformerLowdimPolicy
+diffusion_policy/config/train_diffusion_transformer_lowdim_kitchen_workspace.yaml:26:    _target_: diffusion_policy.model.diffusion.transformer_for_diffusion.TransformerForDiffusion
+diffusion_policy/config/train_diffusion_transformer_lowdim_kitchen_workspace.yaml:45:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_transformer_lowdim_kitchen_workspace.yaml:67:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_bet_lowdim_workspace.yaml:6:_target_: diffusion_policy.workspace.train_bet_lowdim_workspace.TrainBETLowdimWorkspace
+diffusion_policy/config/train_bet_lowdim_workspace.yaml:25:  _target_: diffusion_policy.policy.bet_lowdim_policy.BETLowdimPolicy
+diffusion_policy/config/train_bet_lowdim_workspace.yaml:28:    _target_: diffusion_policy.model.bet.action_ae.discretizers.k_means.KMeansDiscretizer
+diffusion_policy/config/train_bet_lowdim_workspace.yaml:34:    _target_: torch.nn.Identity
+diffusion_policy/config/train_bet_lowdim_workspace.yaml:38:    _target_: diffusion_policy.model.bet.latent_generators.mingpt.MinGPT
+diffusion_policy/config/train_ibc_dfo_real_hybrid_workspace.yaml:6:_target_: diffusion_policy.workspace.train_ibc_dfo_hybrid_workspace.TrainIbcDfoHybridWorkspace
+diffusion_policy/config/train_ibc_dfo_real_hybrid_workspace.yaml:21:  _target_: diffusion_policy.policy.ibc_dfo_hybrid_image_policy.IbcDfoHybridImagePolicy
+diffusion_policy/config/train_ibc_dfo_real_hybrid_workspace.yaml:53:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_unet_hybrid_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_hybrid_workspace.TrainDiffusionUnetHybridWorkspace
+diffusion_policy/config/train_diffusion_unet_hybrid_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_unet_hybrid_image_policy.DiffusionUnetHybridImagePolicy
+diffusion_policy/config/train_diffusion_unet_hybrid_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_unet_hybrid_workspace.yaml:55:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_hybrid_workspace.yaml:77:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_transformer_hybrid_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_transformer_hybrid_workspace.TrainDiffusionTransformerHybridWorkspace
+diffusion_policy/config/train_diffusion_transformer_hybrid_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_transformer_hybrid_image_policy.DiffusionTransformerHybridImagePolicy
+diffusion_policy/config/train_diffusion_transformer_hybrid_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_transformer_hybrid_workspace.yaml:59:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_transformer_lowdim_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_transformer_lowdim_workspace.TrainDiffusionTransformerLowdimWorkspace
+diffusion_policy/config/train_diffusion_transformer_lowdim_workspace.yaml:23:  _target_: diffusion_policy.policy.diffusion_transformer_lowdim_policy.DiffusionTransformerLowdimPolicy
+diffusion_policy/config/train_diffusion_transformer_lowdim_workspace.yaml:26:    _target_: diffusion_policy.model.diffusion.transformer_for_diffusion.TransformerForDiffusion
+diffusion_policy/config/train_diffusion_transformer_lowdim_workspace.yaml:45:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_transformer_lowdim_workspace.yaml:67:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/policy/diffusion_unet_image_policy.py:12:from diffusion_policy.model.vision.multi_image_obs_encoder import MultiImageObsEncoder
+diffusion_policy/policy/diffusion_unet_image_policy.py:15:class DiffusionUnetImagePolicy(BaseImagePolicy):
+diffusion_policy/policy/diffusion_unet_image_policy.py:19:            obs_encoder: MultiImageObsEncoder,
+diffusion_policy/convert_so101_to_zarr.py:122:                        help="output zarr path, e.g. /home/itri2026-3090/diffusion_policy/data/so101/so101_demo.zarr")
+diffusion_policy/plot_mse.py:4:log_file = "/home/itri2026-3090/diffusion_policy/data/outputs/2026.07.14/rgbd_train_diffusion_unet_image_so101_image/logs.json.txt"
+diffusion_policy/model/vision/multi_image_obs_encoder.py:11:class MultiImageObsEncoder(ModuleAttrMixin):
+diffusion_policy/convert_so101_rgbd_to_zarr.py:187:        help="output zarr path, e.g. /home/itri2026-3090/diffusion_policy/data/so101/so101_rgbd.zarr",
+diffusion_policy/config/train_robomimic_real_image_workspace.yaml:6:_target_: diffusion_policy.workspace.train_robomimic_image_workspace.TrainRobomimicImageWorkspace
+diffusion_policy/config/train_robomimic_real_image_workspace.yaml:21:  _target_: diffusion_policy.policy.robomimic_image_policy.RobomimicImagePolicy
+diffusion_policy/config/train_diffusion_unet_lowdim_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_lowdim_workspace.TrainDiffusionUnetLowdimWorkspace
+diffusion_policy/config/train_diffusion_unet_lowdim_workspace.yaml:25:  _target_: diffusion_policy.policy.diffusion_unet_lowdim_policy.DiffusionUnetLowdimPolicy
+diffusion_policy/config/train_diffusion_unet_lowdim_workspace.yaml:28:    _target_: diffusion_policy.model.diffusion.conditional_unet1d.ConditionalUnet1D
+diffusion_policy/config/train_diffusion_unet_lowdim_workspace.yaml:39:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_unet_lowdim_workspace.yaml:63:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_lowdim_workspace.yaml:85:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_unet_real_pretrained_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_image_workspace.TrainDiffusionUnetImageWorkspace
+diffusion_policy/config/train_diffusion_unet_real_pretrained_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_unet_image_policy.DiffusionUnetImagePolicy
+diffusion_policy/config/train_diffusion_unet_real_pretrained_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddim.DDIMScheduler
+diffusion_policy/config/train_diffusion_unet_real_pretrained_workspace.yaml:40:    _target_: diffusion_policy.model.vision.multi_image_obs_encoder.MultiImageObsEncoder
+diffusion_policy/config/train_diffusion_unet_real_pretrained_workspace.yaml:43:      _target_: diffusion_policy.model.vision.model_getter.get_resnet
+diffusion_policy/config/train_diffusion_unet_real_pretrained_workspace.yaml:69:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_real_pretrained_workspace.yaml:91:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_ibc_dfo_hybrid_workspace.yaml:6:_target_: diffusion_policy.workspace.train_ibc_dfo_hybrid_workspace.TrainIbcDfoHybridWorkspace
+diffusion_policy/config/train_ibc_dfo_hybrid_workspace.yaml:21:  _target_: diffusion_policy.policy.ibc_dfo_hybrid_image_policy.IbcDfoHybridImagePolicy
+diffusion_policy/config/train_ibc_dfo_hybrid_workspace.yaml:53:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_unet_image_pretrained_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_image_workspace.TrainDiffusionUnetImageWorkspace
+diffusion_policy/config/train_diffusion_unet_image_pretrained_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_unet_image_policy.DiffusionUnetImagePolicy
+diffusion_policy/config/train_diffusion_unet_image_pretrained_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_unet_image_pretrained_workspace.yaml:37:    _target_: diffusion_policy.model.vision.multi_image_obs_encoder.MultiImageObsEncoder
+diffusion_policy/config/train_diffusion_unet_image_pretrained_workspace.yaml:40:      _target_: diffusion_policy.model.vision.model_getter.get_resnet
+diffusion_policy/config/train_diffusion_unet_image_pretrained_workspace.yaml:66:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_image_pretrained_workspace.yaml:88:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_unet_image_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_image_workspace.TrainDiffusionUnetImageWorkspace
+diffusion_policy/config/train_diffusion_unet_image_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_unet_image_policy.DiffusionUnetImagePolicy
+diffusion_policy/config/train_diffusion_unet_image_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_unet_image_workspace.yaml:37:    _target_: diffusion_policy.model.vision.multi_image_obs_encoder.MultiImageObsEncoder
+diffusion_policy/config/train_diffusion_unet_image_workspace.yaml:40:      _target_: diffusion_policy.model.vision.model_getter.get_resnet
+diffusion_policy/config/train_diffusion_unet_image_workspace.yaml:67:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_image_workspace.yaml:89:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_ibc_dfo_lowdim_workspace.yaml:6:_target_: diffusion_policy.workspace.train_ibc_dfo_lowdim_workspace.TrainIbcDfoLowdimWorkspace
+diffusion_policy/config/train_ibc_dfo_lowdim_workspace.yaml:22:  _target_: diffusion_policy.policy.ibc_dfo_lowdim_policy.IbcDfoLowdimPolicy
+diffusion_policy/config/train_ibc_dfo_lowdim_workspace.yaml:51:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_transformer_lowdim_pusht_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_transformer_lowdim_workspace.TrainDiffusionTransformerLowdimWorkspace
+diffusion_policy/config/train_diffusion_transformer_lowdim_pusht_workspace.yaml:23:  _target_: diffusion_policy.policy.diffusion_transformer_lowdim_policy.DiffusionTransformerLowdimPolicy
+diffusion_policy/config/train_diffusion_transformer_lowdim_pusht_workspace.yaml:26:    _target_: diffusion_policy.model.diffusion.transformer_for_diffusion.TransformerForDiffusion
+diffusion_policy/config/train_diffusion_transformer_lowdim_pusht_workspace.yaml:45:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_transformer_lowdim_pusht_workspace.yaml:67:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_real_image_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_image_workspace.TrainDiffusionUnetImageWorkspace
+diffusion_policy/config/train_diffusion_unet_real_image_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_unet_image_policy.DiffusionUnetImagePolicy
+diffusion_policy/config/train_diffusion_unet_real_image_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddim.DDIMScheduler
+diffusion_policy/config/train_diffusion_unet_real_image_workspace.yaml:40:    _target_: diffusion_policy.model.vision.multi_image_obs_encoder.MultiImageObsEncoder
+diffusion_policy/config/train_diffusion_unet_real_image_workspace.yaml:43:      _target_: diffusion_policy.model.vision.model_getter.get_resnet
+diffusion_policy/config/train_diffusion_unet_real_image_workspace.yaml:69:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_real_image_workspace.yaml:91:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_transformer_real_hybrid_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_transformer_hybrid_workspace.TrainDiffusionTransformerHybridWorkspace
+diffusion_policy/config/train_diffusion_transformer_real_hybrid_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_transformer_hybrid_image_policy.DiffusionTransformerHybridImagePolicy
+diffusion_policy/config/train_diffusion_transformer_real_hybrid_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddim.DDIMScheduler
+diffusion_policy/config/train_diffusion_transformer_real_hybrid_workspace.yaml:62:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_video_workspace.TrainDiffusionUnetVideoWorkspace
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:20:  _target_: diffusion_policy.policy.diffusion_unet_video_policy.DiffusionUnetVideoPolicy
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:25:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:35:    _target_: diffusion_policy.model.obs_encoder.video_core.VideoCore
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:38:      _target_: diffusion_policy.model.obs_encoder.video_core.VideoResNet
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:45:      _target_: diffusion_policy.model.ibc.global_avgpool.GlobalAvgpool
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:70:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_video_workspace.yaml:84:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_unet_ddim_hybrid_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_hybrid_workspace.TrainDiffusionUnetHybridWorkspace
+diffusion_policy/config/train_diffusion_unet_ddim_hybrid_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_unet_hybrid_image_policy.DiffusionUnetHybridImagePolicy
+diffusion_policy/config/train_diffusion_unet_ddim_hybrid_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddim.DDIMScheduler
+diffusion_policy/config/train_diffusion_unet_ddim_hybrid_workspace.yaml:58:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_ddim_hybrid_workspace.yaml:80:  _target_: torch.optim.AdamW
+diffusion_policy/config/task/kitchen_lowdim_abs.yaml:11:  _target_: diffusion_policy.env_runner.kitchen_lowdim_runner.KitchenLowdimRunner
+diffusion_policy/config/task/kitchen_lowdim_abs.yaml:30:  _target_: diffusion_policy.dataset.kitchen_mjl_lowdim_dataset.KitchenMjlLowdimDataset
+diffusion_policy/config/task/can_lowdim.yaml:14:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/can_lowdim.yaml:36:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/tool_hang_image.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/tool_hang_image.yaml:51:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/lift_lowdim.yaml:14:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/lift_lowdim.yaml:37:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/blockpush_lowdim_seed.yaml:9:  _target_: diffusion_policy.env_runner.blockpush_lowdim_runner.BlockPushLowdimRunner
+diffusion_policy/config/task/blockpush_lowdim_seed.yaml:26:  _target_: diffusion_policy.dataset.blockpush_lowdim_dataset.BlockPushLowdimDataset
+diffusion_policy/config/task/can_image_abs.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/can_image_abs.yaml:52:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/pusht_lowdim.yaml:8:  _target_: diffusion_policy.env_runner.pusht_keypoints_runner.PushTKeypointsRunner
+diffusion_policy/config/task/pusht_lowdim.yaml:27:  _target_: diffusion_policy.dataset.pusht_dataset.PushTLowdimDataset
+diffusion_policy/config/task/square_lowdim_abs.yaml:15:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/square_lowdim_abs.yaml:37:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/square_image_abs.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/square_image_abs.yaml:52:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/lift_image.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/lift_image.yaml:52:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/square_lowdim.yaml:14:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/square_lowdim.yaml:36:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/tool_hang_image_abs.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/tool_hang_image_abs.yaml:51:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/kitchen_lowdim.yaml:10:  _target_: diffusion_policy.env_runner.kitchen_lowdim_runner.KitchenLowdimRunner
+diffusion_policy/config/task/kitchen_lowdim.yaml:27:  _target_: diffusion_policy.dataset.kitchen_lowdim_dataset.KitchenLowdimDataset
+diffusion_policy/config/task/real_pusht_image.yaml:31:  _target_: diffusion_policy.env_runner.real_pusht_image_runner.RealPushTImageRunner
+diffusion_policy/config/task/real_pusht_image.yaml:34:  _target_: diffusion_policy.dataset.real_pusht_image_dataset.RealPushTImageDataset
+diffusion_policy/config/task/so101_image.yaml:1:name: so101_image
+diffusion_policy/config/task/so101_image.yaml:6:dataset_path: /home/itri2026-3090/diffusion_policy/data/so101/so101_rgbd.zarr
+diffusion_policy/config/task/so101_image.yaml:22:  _target_: diffusion_policy.dataset.so101_image_dataset.SO101ImageDataset
+diffusion_policy/config/task/tool_hang_lowdim.yaml:14:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/tool_hang_lowdim.yaml:36:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/transport_image.yaml:41:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/transport_image.yaml:63:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/transport_lowdim_abs.yaml:18:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/transport_lowdim_abs.yaml:40:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/can_lowdim_abs.yaml:14:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/can_lowdim_abs.yaml:36:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/transport_lowdim.yaml:18:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/transport_lowdim.yaml:40:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/blockpush_lowdim_seed_abs.yaml:9:  _target_: diffusion_policy.env_runner.blockpush_lowdim_runner.BlockPushLowdimRunner
+diffusion_policy/config/task/blockpush_lowdim_seed_abs.yaml:26:  _target_: diffusion_policy.dataset.blockpush_lowdim_dataset.BlockPushLowdimDataset
+diffusion_policy/config/task/pusht_image.yaml:17:  _target_: diffusion_policy.env_runner.pusht_image_runner.PushTImageRunner
+diffusion_policy/config/task/pusht_image.yaml:33:  _target_: diffusion_policy.dataset.pusht_image_dataset.PushTImageDataset
+diffusion_policy/config/task/lift_lowdim_abs.yaml:14:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/lift_lowdim_abs.yaml:37:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/can_image.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/can_image.yaml:52:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/tool_hang_lowdim_abs.yaml:14:  _target_: diffusion_policy.env_runner.robomimic_lowdim_runner.RobomimicLowdimRunner
+diffusion_policy/config/task/tool_hang_lowdim_abs.yaml:36:  _target_: diffusion_policy.dataset.robomimic_replay_lowdim_dataset.RobomimicReplayLowdimDataset
+diffusion_policy/config/task/transport_image_abs.yaml:41:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/transport_image_abs.yaml:63:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/lift_image_abs.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/lift_image_abs.yaml:51:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/task/square_image.yaml:28:  _target_: diffusion_policy.env_runner.robomimic_image_runner.RobomimicImageRunner
+diffusion_policy/config/task/square_image.yaml:52:  _target_: diffusion_policy.dataset.robomimic_replay_image_dataset.RobomimicReplayImageDataset
+diffusion_policy/config/train_robomimic_lowdim_workspace.yaml:6:_target_: diffusion_policy.workspace.train_robomimic_lowdim_workspace.TrainRobomimicLowdimWorkspace
+diffusion_policy/config/train_robomimic_lowdim_workspace.yaml:22:  _target_: diffusion_policy.policy.robomimic_lowdim_policy.RobomimicLowdimPolicy
+diffusion_policy/config/train_diffusion_unet_ddim_lowdim_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_lowdim_workspace.TrainDiffusionUnetLowdimWorkspace
+diffusion_policy/config/train_diffusion_unet_ddim_lowdim_workspace.yaml:25:  _target_: diffusion_policy.policy.diffusion_unet_lowdim_policy.DiffusionUnetLowdimPolicy
+diffusion_policy/config/train_diffusion_unet_ddim_lowdim_workspace.yaml:28:    _target_: diffusion_policy.model.diffusion.conditional_unet1d.ConditionalUnet1D
+diffusion_policy/config/train_diffusion_unet_ddim_lowdim_workspace.yaml:39:    _target_: diffusers.schedulers.scheduling_ddim.DDIMScheduler
+diffusion_policy/config/train_diffusion_unet_ddim_lowdim_workspace.yaml:66:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_ddim_lowdim_workspace.yaml:88:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_robomimic_image_workspace.yaml:6:_target_: diffusion_policy.workspace.train_robomimic_image_workspace.TrainRobomimicImageWorkspace
+diffusion_policy/config/train_robomimic_image_workspace.yaml:21:  _target_: diffusion_policy.policy.robomimic_image_policy.RobomimicImagePolicy
+diffusion_policy/config/train_diffusion_unet_real_hybrid_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_hybrid_workspace.TrainDiffusionUnetHybridWorkspace
+diffusion_policy/config/train_diffusion_unet_real_hybrid_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_unet_hybrid_image_policy.DiffusionUnetHybridImagePolicy
+diffusion_policy/config/train_diffusion_unet_real_hybrid_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddim.DDIMScheduler
+diffusion_policy/config/train_diffusion_unet_real_hybrid_workspace.yaml:59:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_real_hybrid_workspace.yaml:81:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_transformer_lowdim_kitchen_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_transformer_lowdim_workspace.TrainDiffusionTransformerLowdimWorkspace
+diffusion_policy/config/train_diffusion_transformer_lowdim_kitchen_workspace.yaml:23:  _target_: diffusion_policy.policy.diffusion_transformer_lowdim_policy.DiffusionTransformerLowdimPolicy
+diffusion_policy/config/train_diffusion_transformer_lowdim_kitchen_workspace.yaml:26:    _target_: diffusion_policy.model.diffusion.transformer_for_diffusion.TransformerForDiffusion
+diffusion_policy/config/train_diffusion_transformer_lowdim_kitchen_workspace.yaml:45:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_transformer_lowdim_kitchen_workspace.yaml:67:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_bet_lowdim_workspace.yaml:6:_target_: diffusion_policy.workspace.train_bet_lowdim_workspace.TrainBETLowdimWorkspace
+diffusion_policy/config/train_bet_lowdim_workspace.yaml:25:  _target_: diffusion_policy.policy.bet_lowdim_policy.BETLowdimPolicy
+diffusion_policy/config/train_bet_lowdim_workspace.yaml:28:    _target_: diffusion_policy.model.bet.action_ae.discretizers.k_means.KMeansDiscretizer
+diffusion_policy/config/train_bet_lowdim_workspace.yaml:34:    _target_: torch.nn.Identity
+diffusion_policy/config/train_bet_lowdim_workspace.yaml:38:    _target_: diffusion_policy.model.bet.latent_generators.mingpt.MinGPT
+diffusion_policy/config/train_ibc_dfo_real_hybrid_workspace.yaml:6:_target_: diffusion_policy.workspace.train_ibc_dfo_hybrid_workspace.TrainIbcDfoHybridWorkspace
+diffusion_policy/config/train_ibc_dfo_real_hybrid_workspace.yaml:21:  _target_: diffusion_policy.policy.ibc_dfo_hybrid_image_policy.IbcDfoHybridImagePolicy
+diffusion_policy/config/train_ibc_dfo_real_hybrid_workspace.yaml:53:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_unet_hybrid_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_unet_hybrid_workspace.TrainDiffusionUnetHybridWorkspace
+diffusion_policy/config/train_diffusion_unet_hybrid_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_unet_hybrid_image_policy.DiffusionUnetHybridImagePolicy
+diffusion_policy/config/train_diffusion_unet_hybrid_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_unet_hybrid_workspace.yaml:55:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_unet_hybrid_workspace.yaml:77:  _target_: torch.optim.AdamW
+diffusion_policy/config/train_diffusion_transformer_hybrid_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_transformer_hybrid_workspace.TrainDiffusionTransformerHybridWorkspace
+diffusion_policy/config/train_diffusion_transformer_hybrid_workspace.yaml:22:  _target_: diffusion_policy.policy.diffusion_transformer_hybrid_image_policy.DiffusionTransformerHybridImagePolicy
+diffusion_policy/config/train_diffusion_transformer_hybrid_workspace.yaml:27:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_transformer_hybrid_workspace.yaml:59:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/config/train_diffusion_transformer_lowdim_workspace.yaml:6:_target_: diffusion_policy.workspace.train_diffusion_transformer_lowdim_workspace.TrainDiffusionTransformerLowdimWorkspace
+diffusion_policy/config/train_diffusion_transformer_lowdim_workspace.yaml:23:  _target_: diffusion_policy.policy.diffusion_transformer_lowdim_policy.DiffusionTransformerLowdimPolicy
+diffusion_policy/config/train_diffusion_transformer_lowdim_workspace.yaml:26:    _target_: diffusion_policy.model.diffusion.transformer_for_diffusion.TransformerForDiffusion
+diffusion_policy/config/train_diffusion_transformer_lowdim_workspace.yaml:45:    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+diffusion_policy/config/train_diffusion_transformer_lowdim_workspace.yaml:67:  _target_: diffusion_policy.model.diffusion.ema_model.EMAModel
+diffusion_policy/dataset/so101_image_dataset.py:20:class SO101ImageDataset(BaseImageDataset):
+diffusion_policy/dataset/so101_image_dataset.py:170:        'diffusion_policy/data/so101/'
+diffusion_policy/dataset/so101_image_dataset.py:171:        'so101_rgbd_future6.zarr'
+diffusion_policy/dataset/so101_image_dataset.py:176:        dataset = SO101ImageDataset(
+diffusion_policy/workspace/train_diffusion_unet_image_workspace.py:23:from diffusion_policy.policy.diffusion_unet_image_policy import DiffusionUnetImagePolicy
+diffusion_policy/workspace/train_diffusion_unet_image_workspace.py:34:class TrainDiffusionUnetImageWorkspace(BaseWorkspace):
+diffusion_policy/workspace/train_diffusion_unet_image_workspace.py:47:        self.model: DiffusionUnetImagePolicy = hydra.utils.instantiate(cfg.policy)
+diffusion_policy/workspace/train_diffusion_unet_image_workspace.py:49:        self.ema_model: DiffusionUnetImagePolicy = None
+diffusion_policy/workspace/train_diffusion_unet_image_workspace.py:301:    workspace = TrainDiffusionUnetImageWorkspace(cfg)
+diffusion_policy/plot_loss.py:5:    "/home/itri2026-3090/diffusion_policy/data/outputs/2026.07.14/rgbd_train_diffusion_unet_image_so101_image/logs.json.txt"
+diffusion_policy/plot_loss.py:93:plt.title("SO101 Diffusion Policy Loss Curve")
