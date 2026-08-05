@@ -2,10 +2,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 LOG_PATH = (
-    "/home/itri2026-3090/diffusion_policy/data/outputs/2026.07.14/rgbd_train_diffusion_unet_image_so101_image/logs.json.txt"
+    "/home/itri2026-3090/SO101_diffusion_policy/data/outputs/2026.08.04/21.34.04_train_diffusion_unet_image_so101_image/logs.json.txt"
 )
 
-OUTPUT_PATH = "loss_curve_rgbd.png"
+OUTPUT_PATH = "loss_curve_0804-4.png"
 
 # -----------------------
 # Read log

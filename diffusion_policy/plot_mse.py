@@ -1,7 +1,7 @@
 import json
 import matplotlib.pyplot as plt
 
-log_file = "/home/itri2026-3090/diffusion_policy/data/outputs/2026.07.14/rgbd_train_diffusion_unet_image_so101_image/logs.json.txt"
+log_file = "/home/itri2026-3090/SO101_diffusion_policy/data/outputs/2026.08.04/21.34.04_train_diffusion_unet_image_so101_image/logs.json.txt"
 epochs = []
 mse = []
 
@@ -37,7 +37,7 @@ plt.scatter(
 plt.legend()
 
 plt.tight_layout()
-plt.savefig("mse_curve_rgbd.png", dpi=300)
+plt.savefig("mse_curve_0804-4.png", dpi=300)
 plt.show()
 
 print(f"Best Epoch : {epochs[best_idx]}")
