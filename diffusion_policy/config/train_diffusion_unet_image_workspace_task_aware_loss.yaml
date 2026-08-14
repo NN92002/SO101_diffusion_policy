@@ -3,7 +3,7 @@ defaults:
   - task: lift_image_abs
 
 name: train_diffusion_unet_image
-_target_: diffusion_policy.workspace.train_diffusion_unet_image_workspace.TrainDiffusionUnetImageWorkspace
+_target_: diffusion_policy.workspace.train_diffusion_unet_image_workspace_task_aware_loss.TrainDiffusionUnetImageWorkspace
 
 task_name: ${task.name}
 shape_meta: ${task.shape_meta}
@@ -96,7 +96,7 @@ training:
   device: "cuda:0"
   seed: 42
   debug: False
-  resume: True
+  resume: False
 
   lr_scheduler: reduce_on_plateau
 
@@ -125,6 +125,27 @@ training:
   max_train_steps: null
   max_val_steps: null
   tqdm_interval_sec: 1.0
+
+  # ------------------------------------------------------------
+  # Task-aware training loss
+  #
+  # total_loss =
+  #   noise_weight * diffusion_noise_MSE
+  #   + position_weight * reconstructed_x0_position_MSE
+  #   + orientation_weight * reconstructed_x0_orientation_MSE
+  #   + gripper_weight * reconstructed_x0_gripper_MSE
+  #
+  # Auxiliary action losses are calculated in NORMALIZED action space
+  # and DO participate in backpropagation / weight updates.
+  # ------------------------------------------------------------
+  task_loss_noise_weight: 1.0
+  task_loss_position_weight: 0.5
+  task_loss_orientation_weight: 0.2
+  task_loss_gripper_weight: 0.2
+
+  # Only apply x0 auxiliary loss to lower-noise DDPM timesteps.
+  # Scheduler has 100 steps (0~99); 50 is a stable starting point.
+  task_loss_max_timestep: 50
 
   # Scheduler / Early Stopping / best.ckpt 共同監控的指標
   monitor_key: val_task_score

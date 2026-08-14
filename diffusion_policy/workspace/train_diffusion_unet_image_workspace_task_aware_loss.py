@@ -10,6 +10,8 @@ if __name__ == "__main__":
 import os
 import hydra
 import torch
+import torch.nn.functional as F
+from einops import reduce
 from omegaconf import OmegaConf
 import pathlib
 from torch.utils.data import DataLoader
@@ -30,6 +32,199 @@ from diffusion_policy.model.diffusion.ema_model import EMAModel
 from diffusion_policy.model.common.lr_scheduler import get_scheduler
 
 OmegaConf.register_new_resolver("eval", eval, replace=True)
+
+
+def _masked_mean(value, mask):
+    """Mean over valid elements only."""
+    mask = mask.to(dtype=value.dtype)
+    denom = mask.sum().clamp_min(1.0)
+    return (value * mask).sum() / denom
+
+
+def compute_task_aware_diffusion_loss(policy, batch, cfg):
+    """
+    Diffusion epsilon-prediction loss + task-aware x0 reconstruction loss.
+
+    Expected action layout:
+        [x, y, z, qx, qy, qz, qw, gripper]
+
+    The auxiliary task losses are computed in normalized action space so the
+    different physical units do not dominate one another. They backpropagate
+    through the same epsilon prediction used by DDPM.
+
+    To avoid unstable x0 reconstruction at very noisy diffusion steps, the
+    auxiliary loss is applied only when timestep <= task_loss_max_timestep.
+    """
+    # Same normalization path as DiffusionUnetImagePolicy.compute_loss().
+    assert 'valid_mask' not in batch
+    nobs = policy.normalizer.normalize(batch['obs'])
+    nactions = policy.normalizer['action'].normalize(batch['action'])
+
+    batch_size = nactions.shape[0]
+    horizon = nactions.shape[1]
+
+    local_cond = None
+    global_cond = None
+    trajectory = nactions
+    cond_data = trajectory
+
+    if policy.obs_as_global_cond:
+        this_nobs = dict_apply(
+            nobs,
+            lambda x: x[:, :policy.n_obs_steps, ...].reshape(-1, *x.shape[2:])
+        )
+        nobs_features = policy.obs_encoder(this_nobs)
+        global_cond = nobs_features.reshape(batch_size, -1)
+    else:
+        this_nobs = dict_apply(
+            nobs,
+            lambda x: x.reshape(-1, *x.shape[2:])
+        )
+        nobs_features = policy.obs_encoder(this_nobs)
+        nobs_features = nobs_features.reshape(batch_size, horizon, -1)
+        cond_data = torch.cat([nactions, nobs_features], dim=-1)
+        trajectory = cond_data.detach()
+
+    condition_mask = policy.mask_generator(trajectory.shape)
+
+    noise = torch.randn(trajectory.shape, device=trajectory.device)
+    bsz = trajectory.shape[0]
+    timesteps = torch.randint(
+        0,
+        policy.noise_scheduler.config.num_train_timesteps,
+        (bsz,),
+        device=trajectory.device
+    ).long()
+
+    noisy_trajectory = policy.noise_scheduler.add_noise(
+        trajectory, noise, timesteps
+    )
+
+    loss_mask = ~condition_mask
+    noisy_trajectory[condition_mask] = cond_data[condition_mask]
+
+    pred = policy.model(
+        noisy_trajectory,
+        timesteps,
+        local_cond=local_cond,
+        global_cond=global_cond
+    )
+
+    pred_type = policy.noise_scheduler.config.prediction_type
+    if pred_type != 'epsilon':
+        raise ValueError(
+            "Task-aware x0 reconstruction currently requires "
+            f"prediction_type='epsilon', got {pred_type!r}."
+        )
+
+    # ------------------------------------------------------------
+    # 1. Original Diffusion Policy epsilon-prediction loss
+    # ------------------------------------------------------------
+    noise_element_loss = F.mse_loss(pred, noise, reduction='none')
+    noise_element_loss = (
+        noise_element_loss * loss_mask.to(noise_element_loss.dtype)
+    )
+    noise_loss = reduce(
+        noise_element_loss, 'b ... -> b (...)', 'mean'
+    ).mean()
+
+    # ------------------------------------------------------------
+    # 2. Reconstruct clean normalized action x0 from epsilon prediction
+    #
+    # x_t = sqrt(alpha_bar_t) * x0
+    #       + sqrt(1-alpha_bar_t) * epsilon
+    #
+    # x0_hat = (x_t - sqrt(1-alpha_bar_t) * epsilon_hat)
+    #          / sqrt(alpha_bar_t)
+    # ------------------------------------------------------------
+    alphas_cumprod = policy.noise_scheduler.alphas_cumprod.to(
+        device=trajectory.device,
+        dtype=trajectory.dtype
+    )
+    alpha_bar = alphas_cumprod[timesteps]
+
+    broadcast_shape = [bsz] + [1] * (trajectory.ndim - 1)
+    alpha_bar = alpha_bar.reshape(broadcast_shape)
+
+    sqrt_alpha_bar = alpha_bar.sqrt().clamp_min(1e-6)
+    sqrt_one_minus_alpha_bar = (1.0 - alpha_bar).clamp_min(0.0).sqrt()
+
+    pred_x0 = (
+        noisy_trajectory - sqrt_one_minus_alpha_bar * pred
+    ) / sqrt_alpha_bar
+
+    # Task loss only uses the 8 action dimensions.
+    if nactions.shape[-1] != 8:
+        raise RuntimeError(
+            "Task-aware action loss expects action dimension 8 with layout "
+            "[x,y,z,qx,qy,qz,qw,gripper], "
+            f"but got {nactions.shape[-1]}."
+        )
+
+    pred_action_x0 = pred_x0[..., :8]
+    gt_action_x0 = nactions
+
+    action_loss_mask = loss_mask[..., :8]
+
+    # High-noise timesteps can make x0 estimation extremely large.
+    max_task_t = int(cfg.training.task_loss_max_timestep)
+    timestep_valid = (timesteps <= max_task_t)
+    timestep_valid = timestep_valid.reshape(
+        [bsz] + [1] * (action_loss_mask.ndim - 1)
+    )
+    task_mask = action_loss_mask & timestep_valid
+
+    # Position: x, y, z
+    position_sq_error = (
+        pred_action_x0[..., 0:3] - gt_action_x0[..., 0:3]
+    ).square()
+    position_loss = _masked_mean(
+        position_sq_error,
+        task_mask[..., 0:3]
+    )
+
+    # Orientation: qx, qy, qz, qw.
+    # This is component MSE in normalized action space. Physical geodesic
+    # orientation error is still evaluated separately during validation.
+    orientation_sq_error = (
+        pred_action_x0[..., 3:7] - gt_action_x0[..., 3:7]
+    ).square()
+    orientation_loss = _masked_mean(
+        orientation_sq_error,
+        task_mask[..., 3:7]
+    )
+
+    # Gripper
+    gripper_sq_error = (
+        pred_action_x0[..., 7:8] - gt_action_x0[..., 7:8]
+    ).square()
+    gripper_loss = _masked_mean(
+        gripper_sq_error,
+        task_mask[..., 7:8]
+    )
+
+    weighted_task_loss = (
+        cfg.training.task_loss_position_weight * position_loss
+        + cfg.training.task_loss_orientation_weight * orientation_loss
+        + cfg.training.task_loss_gripper_weight * gripper_loss
+    )
+
+    total_loss = (
+        cfg.training.task_loss_noise_weight * noise_loss
+        + weighted_task_loss
+    )
+
+    components = {
+        'total_loss': total_loss,
+        'noise_loss': noise_loss,
+        'position_loss': position_loss,
+        'orientation_loss': orientation_loss,
+        'gripper_loss': gripper_loss,
+        'weighted_task_loss': weighted_task_loss,
+        'task_valid_fraction': timestep_valid.float().mean(),
+    }
+    return total_loss, components
+
 
 class TrainDiffusionUnetImageWorkspace(BaseWorkspace):
     include_keys = ['global_step', 'epoch']
@@ -183,6 +378,11 @@ class TrainDiffusionUnetImageWorkspace(BaseWorkspace):
                     self.model.obs_encoder.requires_grad_(False)
 
                 train_losses = list()
+                train_noise_losses = list()
+                train_position_losses = list()
+                train_orientation_losses = list()
+                train_gripper_losses = list()
+                train_task_losses = list()
                 with tqdm.tqdm(train_dataloader, desc=f"Training epoch {self.epoch}", 
                         leave=False, mininterval=cfg.training.tqdm_interval_sec) as tepoch:
                     for batch_idx, batch in enumerate(tepoch):
@@ -191,8 +391,10 @@ class TrainDiffusionUnetImageWorkspace(BaseWorkspace):
                         if train_sampling_batch is None:
                             train_sampling_batch = batch
 
-                        # compute loss
-                        raw_loss = self.model.compute_loss(batch)
+                        # compute task-aware diffusion loss
+                        raw_loss, loss_components = compute_task_aware_diffusion_loss(
+                            self.model, batch, cfg
+                        )
                         loss = raw_loss / cfg.training.gradient_accumulate_every
                         loss.backward()
 
@@ -209,10 +411,32 @@ class TrainDiffusionUnetImageWorkspace(BaseWorkspace):
 
                         # logging
                         raw_loss_cpu = raw_loss.item()
-                        tepoch.set_postfix(loss=raw_loss_cpu, refresh=False)
+                        noise_loss_cpu = loss_components['noise_loss'].item()
+                        position_loss_cpu = loss_components['position_loss'].item()
+                        orientation_loss_cpu = loss_components['orientation_loss'].item()
+                        gripper_loss_cpu = loss_components['gripper_loss'].item()
+                        task_loss_cpu = loss_components['weighted_task_loss'].item()
+
+                        tepoch.set_postfix(
+                            loss=raw_loss_cpu,
+                            noise=noise_loss_cpu,
+                            task=task_loss_cpu,
+                            refresh=False
+                        )
                         train_losses.append(raw_loss_cpu)
+                        train_noise_losses.append(noise_loss_cpu)
+                        train_position_losses.append(position_loss_cpu)
+                        train_orientation_losses.append(orientation_loss_cpu)
+                        train_gripper_losses.append(gripper_loss_cpu)
+                        train_task_losses.append(task_loss_cpu)
+
                         step_log = {
                             'train_loss': raw_loss_cpu,
+                            'train_noise_loss': noise_loss_cpu,
+                            'train_position_loss': position_loss_cpu,
+                            'train_orientation_loss': orientation_loss_cpu,
+                            'train_gripper_loss': gripper_loss_cpu,
+                            'train_task_loss': task_loss_cpu,
                             'global_step': self.global_step,
                             'epoch': self.epoch,
                             'lr': self.optimizer.param_groups[0]['lr']
@@ -233,6 +457,11 @@ class TrainDiffusionUnetImageWorkspace(BaseWorkspace):
                 # replace train_loss with epoch average
                 train_loss = np.mean(train_losses)
                 step_log['train_loss'] = train_loss
+                step_log['train_noise_loss'] = np.mean(train_noise_losses)
+                step_log['train_position_loss'] = np.mean(train_position_losses)
+                step_log['train_orientation_loss'] = np.mean(train_orientation_losses)
+                step_log['train_gripper_loss'] = np.mean(train_gripper_losses)
+                step_log['train_task_loss'] = np.mean(train_task_losses)
 
                 # ========= eval for this epoch ==========
                 policy = self.model
@@ -250,12 +479,19 @@ class TrainDiffusionUnetImageWorkspace(BaseWorkspace):
                     step_log.update(runner_log)
 
                 # Run validation and task-space action evaluation.
-                # The diffusion loss is still logged, but scheduler, early stopping,
-                # and best-checkpoint selection monitor val_task_score by default.
+                # The task-aware training objective is logged as val_loss; the original
+                # diffusion-only component is logged as val_noise_loss. Scheduler,
+                # early stopping, and best-checkpoint selection still monitor
+                # val_task_score by default.
                 if (self.epoch % cfg.training.val_every) == 0:
                     with torch.no_grad():
-                        # ----- diffusion validation loss -----
+                        # ----- task-aware validation loss -----
                         val_losses = list()
+                        val_noise_losses = list()
+                        val_position_aux_losses = list()
+                        val_orientation_aux_losses = list()
+                        val_gripper_aux_losses = list()
+                        val_task_aux_losses = list()
                         with tqdm.tqdm(
                             val_dataloader,
                             desc=f"Validation epoch {self.epoch}",
@@ -267,14 +503,38 @@ class TrainDiffusionUnetImageWorkspace(BaseWorkspace):
                                     batch,
                                     lambda x: x.to(device, non_blocking=True)
                                 )
-                                loss = self.model.compute_loss(batch)
+                                loss, val_components = compute_task_aware_diffusion_loss(
+                                    self.model, batch, cfg
+                                )
                                 val_losses.append(loss.detach().cpu())
+                                val_noise_losses.append(
+                                    val_components['noise_loss'].detach().cpu())
+                                val_position_aux_losses.append(
+                                    val_components['position_loss'].detach().cpu())
+                                val_orientation_aux_losses.append(
+                                    val_components['orientation_loss'].detach().cpu())
+                                val_gripper_aux_losses.append(
+                                    val_components['gripper_loss'].detach().cpu())
+                                val_task_aux_losses.append(
+                                    val_components['weighted_task_loss'].detach().cpu())
                                 if (cfg.training.max_val_steps is not None) \
                                         and batch_idx >= (cfg.training.max_val_steps - 1):
                                     break
 
                         if len(val_losses) > 0:
+                            # val_loss is now the TOTAL task-aware training objective.
                             step_log['val_loss'] = torch.stack(val_losses).mean().item()
+                            # Keep original diffusion loss separately for diagnosis.
+                            step_log['val_noise_loss'] = (
+                                torch.stack(val_noise_losses).mean().item())
+                            step_log['val_position_loss'] = (
+                                torch.stack(val_position_aux_losses).mean().item())
+                            step_log['val_orientation_loss'] = (
+                                torch.stack(val_orientation_aux_losses).mean().item())
+                            step_log['val_gripper_loss'] = (
+                                torch.stack(val_gripper_aux_losses).mean().item())
+                            step_log['val_task_aux_loss'] = (
+                                torch.stack(val_task_aux_losses).mean().item())
 
                         # ----- denormalized validation action metrics -----
                         # Expected action layout:
